@@ -10,7 +10,7 @@ module.exports.index = async (req, res, next) => {
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
     } else {
-        res.send("parameter kota tidak boleh kosong");
+        res.status(400).send("parameter kota tidak boleh kosong");
     }
 
     fs.readFile('cache/weather.json', (err, data) => {
@@ -21,7 +21,7 @@ module.exports.index = async (req, res, next) => {
         if (weatherData.length > 0) {
             res.send(weatherData[0]);
         } else {
-            res.send("kota tidak ditemukan");
+            res.status(404).send("kota tidak ditemukan");
         }
 
     });
